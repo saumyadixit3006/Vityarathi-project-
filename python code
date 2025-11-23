@@ -1,0 +1,204 @@
+import csv
+import os
+from statistics import mean
+
+DATA_FILE = "data/habits.csv"
+
+def init_file():
+    if not os.path.exists("data"):
+        os.makedirs("data")
+    if not os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["day", "habit1", "habit2", "habit3"])
+
+def add_daily_data(day, h1, h2, h3):
+    with open(DATA_FILE, "a", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([day, h1, h2, h3])
+    print("Data added successfully!")
+
+def calculate_consistency():
+    days = []
+    habit1, habit2, habit3 = [], [], []
+
+    with open(DATA_FILE, "r") as f:
+        reader = csv.reader(f)
+        next(reader)
+        for row in reader:
+            days.append(row[0])
+            habit1.append(int(row[1]))
+            habit2.append(int(row[2]))
+            habit3.append(int(row[3]))
+
+    scores = []
+    for h in [habit1, habit2, habit3]:
+        scores.append(mean(h) * 100)
+
+    overall_score = mean(scores)
+
+    print("\n CONSISTENCY REPORT ")
+    print(f"Habit 1 Consistency : {scores[0]:.2f}%")
+    print(f"Habit 2 Consistency : {scores[1]:.2f}%")
+    print(f"Habit 3 Consistency : {scores[2]:.2f}%")
+    print(f"Overall Score       : {overall_score:.2f}%")
+
+    if overall_score >= 80:
+        print("Excellent! You're very consistent.")
+    elif overall_score >= 50:
+        print("Good. Some days are missing, but improving.")
+    else:
+        print("Low consistency. Try maintaining streaks!")
+    print(" ")
+
+def predict_next_week():
+    habit_scores = []
+
+    with open(DATA_FILE, "r") as f:
+        reader = csv.reader(f)
+        next(reader)
+        for row in reader:
+            avg = (int(row[1]) + int(row[2]) + int(row[3])) / 3
+            habit_scores.append(avg)
+
+    if len(habit_scores) < 3:
+        print("Not enough data to predict. Enter at least 3 days.")
+        return
+
+    moving_avg = mean(habit_scores[-3:]) * 100
+
+    print("\nPredicted Next Week Consistency Score:", f"{moving_avg:.2f}%")
+    print(" ")
+
+init_file()
+
+while True:
+    print("\n Habit Consistency Tracker")
+    print("1. Add Daily Habit Data")
+    print("2. Show Consistency Score")
+    print("3. Predict Next Week Score")
+    print("4. Exit")
+
+    choice = input("Enter option: ")
+
+    if choice == "1":
+        day = input("Enter day name: ")
+        h1 = int(input("Habit 1 done? (1=Yes, 0=No): "))
+        h2 = int(input("Habit 2 done? (1=Yes, 0=No): "))
+        h3 = int(input("Habit 3 done? (1=Yes, 0=No): "))
+        add_daily_data(day, h1, h2, h3)
+
+    elif choice == "2":
+        calculate_consistency()
+
+    elif choice == "3":
+        predict_next_week()
+
+    elif choice == "4":
+        print("Exiting... Goodbye!")
+        break
+
+    else:
+      import csv
+import os
+from statistics import mean
+
+DATA_FILE = "data/habits.csv"
+
+def init_file():
+    if not os.path.exists("data"):
+        os.makedirs("data")
+    if not os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["day", "habit1", "habit2", "habit3"])
+
+def add_daily_data(day, h1, h2, h3):
+    with open(DATA_FILE, "a", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([day, h1, h2, h3])
+    print("Data added successfully!")
+
+def calculate_consistency():
+    days = []
+    habit1, habit2, habit3 = [], [], []
+
+    with open(DATA_FILE, "r") as f:
+        reader = csv.reader(f)
+        next(reader)
+        for row in reader:
+            days.append(row[0])
+            habit1.append(int(row[1]))
+            habit2.append(int(row[2]))
+            habit3.append(int(row[3]))
+
+    scores = []
+    for h in [habit1, habit2, habit3]:
+        scores.append(mean(h) * 100)
+
+    overall_score = mean(scores)
+
+    print("\n CONSISTENCY REPORT ")
+    print(f"Habit 1 Consistency : {scores[0]:.2f}%")
+    print(f"Habit 2 Consistency : {scores[1]:.2f}%")
+    print(f"Habit 3 Consistency : {scores[2]:.2f}%")
+    print(f"Overall Score       : {overall_score:.2f}%")
+
+    if overall_score >= 80:
+        print("Excellent! You're very consistent.")
+    elif overall_score >= 50:
+        print("Good. Some days are missing, but improving.")
+    else:
+        print("Low consistency. Try maintaining streaks!")
+    print(" ")
+
+def predict_next_week():
+    habit_scores = []
+
+    with open(DATA_FILE, "r") as f:
+        reader = csv.reader(f)
+        next(reader)
+        for row in reader:
+            avg = (int(row[1]) + int(row[2]) + int(row[3])) / 3
+            habit_scores.append(avg)
+
+    if len(habit_scores) < 3:
+        print("Not enough data to predict. Enter at least 3 days.")
+        return
+
+    moving_avg = mean(habit_scores[-3:]) * 100
+
+    print("\nPredicted Next Week Consistency Score:", f"{moving_avg:.2f}%")
+    print(" ")
+
+init_file()
+
+while True:
+    print("\n Habit Consistency Tracker")
+    print("1. Add Daily Habit Data")
+    print("2. Show Consistency Score")
+    print("3. Predict Next Week Score")
+    print("4. Exit")
+
+    choice = input("Enter option: ")
+
+    if choice == "1":
+        day = input("Enter day name: ")
+        h1 = int(input("Habit 1 done? (1=Yes, 0=No): "))
+        h2 = int(input("Habit 2 done? (1=Yes, 0=No): "))
+        h3 = int(input("Habit 3 done? (1=Yes, 0=No): "))
+        add_daily_data(day, h1, h2, h3)
+
+    elif choice == "2":
+        calculate_consistency()
+
+    elif choice == "3":
+        predict_next_week()
+
+    elif choice == "4":
+        print("Exiting... Goodbye!")
+        break
+
+    else:
+        print("Invalid option. Try again.")
+        print("Invalid option. Try again.")

@@ -1,5 +1,5 @@
 # Vityarathi-project-
-Habit consistency tracker
+
 HABIT CONSISTENCY TRACKER
   
                       It is a simple Python- based project that helps users track their daily habits,calculate consistency scores and predict next week'sperformance based on past data.
